@@ -1,5 +1,5 @@
 buildscript {
-    ext.kotlin_version = '1.8.0'
+    ext.kotlin_version = '1.8.10'
 
     repositories {
         google()
@@ -26,14 +26,14 @@ task clean(type: Delete) {
 }
 
 ext {
-    activityVersion = '1.6.1'
+    activityVersion = '1.7.1'
     appCompatVersion = '1.6.1'
     constraintLayoutVersion = '2.1.4'
     coreTestingVersion = '2.2.0'
     coroutines = '1.6.4'
-    lifecycleVersion = '2.6.0'
+    lifecycleVersion = '2.6.1'
     materialVersion = '1.8.0'
-    roomVersion = '2.5.0'
+    roomVersion = '2.5.1'
     // testing
     junitVersion = '4.13.2'
     espressoVersion = '3.4.0'
