@@ -35,55 +35,58 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MainActivityScreen()
+            Column(modifier = Modifier.padding(16.dp)) {
+                InputSection()
+                Spacer(modifier = Modifier.height(16.dp))
+                ResultSection()
+                HistorySection()
+            }
         }
     }
 
     @Composable
-    fun MainActivityScreen() {
+    fun InputSection() {
         var location by remember { mutableStateOf(TextFieldValue()) }
-        Column(
-            modifier = Modifier.padding(16.dp)
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Text(text = "Enter location:")
-                OutlinedTextField(
-                    value = location,
-                    onValueChange = { location = it },
-                    modifier = Modifier.weight(1f)
-                )
-                Button(onClick = {
-                    val tempLocation = location.text.replace(' ', '&')
-                    loadWeatherData(tempLocation)
-                }) {
-                    Text(text = "Submit")
+            Text(text = "Enter location:")
+            OutlinedTextField(
+                value = location,
+                onValueChange = { location = it },
+                modifier = Modifier.weight(1f)
+            )
+            Button(onClick = {
+                val tempLocation = location.text.replace(' ', '&')
+                loadWeatherData(tempLocation)
+            }) {
+                Text(text = "Submit")
+            }
+        }
+    }
+
+    @Composable
+    fun ResultSection() {
+        val currentWeather by mWeatherViewModel.data.observeAsState()
+        if (currentWeather != null) {
+            Text(text = "Temperature: " + (currentWeather!!.temperature.temp - 273.15).roundToInt() + " C")
+            Text(text = "Pressure: " + currentWeather!!.currentCondition.pressure + " hPa")
+            Text(text = "Humidity: " + currentWeather!!.currentCondition.humidity + "%")
+            Text(text = "Wind speed: " + currentWeather!!.wind.speed + "m/s")
+            Text(text = "Wind degrees: " + currentWeather!!.wind.deg)
+        }
+    }
+
+    @Composable
+    fun HistorySection() {
+        val weatherTableList by mWeatherViewModel.allCityWeather.observeAsState()
+        if (weatherTableList != null) {
+            LazyColumn() {
+                items(weatherTableList!!) { item ->
+                    WeatherListItem(weatherItem = item)
                 }
             }
-            Spacer(modifier = Modifier.height(16.dp))
-
-            val currentWeather by mWeatherViewModel.data.observeAsState()
-            if (currentWeather != null) {
-                Text(text = "Temperature: " + (currentWeather!!.temperature.temp - 273.15).roundToInt() + " C")
-                Text(text = "Pressure: " + currentWeather!!.currentCondition.pressure + " hPa")
-                Text(text = "Humidity: " + currentWeather!!.currentCondition.humidity + "%")
-                Text(text = "Wind speed: " + currentWeather!!.wind.speed + "m/s")
-                Text(text = "Wind degrees: " + currentWeather!!.wind.deg)
-            }
-
-            val weatherTableList by mWeatherViewModel.allCityWeather.observeAsState()
-            if (weatherTableList != null) {
-                LazyColumn(
-                    modifier = Modifier.weight(1f)
-                ) {
-                    items(weatherTableList!!) { item ->
-                        WeatherListItem(weatherItem = item)
-                    }
-                }
-            }
-
         }
     }
 
