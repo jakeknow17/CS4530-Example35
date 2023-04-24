@@ -1,5 +1,6 @@
-package com.example.example35
+package com.example.example35.database.weather
 
+import com.example.example35.database.location.LocationData
 
 
 class WeatherData {

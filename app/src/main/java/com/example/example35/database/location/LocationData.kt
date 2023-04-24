@@ -1,4 +1,4 @@
-package com.example.example35
+package com.example.example35.database.location
 
 class LocationData {
     var latitude = 0.0

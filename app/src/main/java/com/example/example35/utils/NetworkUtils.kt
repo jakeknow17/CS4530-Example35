@@ -1,12 +1,10 @@
-package com.example.example35
+package com.example.example35.utils
 
 import androidx.annotation.WorkerThread
-import java.io.IOException
 import java.net.HttpURLConnection
 import java.net.MalformedURLException
 import java.net.URL
 import java.util.*
-import kotlin.Throws
 
 object NetworkUtils {
     private const val BASE_URL = "http://api.openweathermap.org/data/2.5/weather?q="

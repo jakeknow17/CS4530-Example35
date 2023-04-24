@@ -1,7 +1,12 @@
-package com.example.example35
+package com.example.example35.repository
 
 import androidx.lifecycle.MutableLiveData
 import androidx.annotation.WorkerThread
+import com.example.example35.utils.JSONWeatherUtils
+import com.example.example35.utils.NetworkUtils
+import com.example.example35.database.weather.WeatherDao
+import com.example.example35.database.weather.WeatherData
+import com.example.example35.database.weather.WeatherTable
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -32,7 +37,7 @@ class WeatherRepository private constructor(weatherDao: WeatherDao) {
             if(mJsonString!=null) {
                 // Populate live data object. But since this is happening in a background thread (the coroutine),
                 // we have to use postValue rather than setValue. Use setValue if update is on main thread
-                data.postValue( JSONWeatherUtils.getWeatherData(mJsonString))
+                data.postValue(JSONWeatherUtils.getWeatherData(mJsonString))
 
                 // insert into db. This will trigger a flow
                 // that updates a recyclerview. All db ops should happen
@@ -71,10 +76,10 @@ class WeatherRepository private constructor(weatherDao: WeatherDao) {
         private lateinit var mScope: CoroutineScope
         @Synchronized
         fun getInstance(weatherDao: WeatherDao,
-        scope: CoroutineScope
+                        scope: CoroutineScope
         ): WeatherRepository {
             mScope = scope
-            return mInstance?: synchronized(this){
+            return mInstance ?: synchronized(this){
                 val instance = WeatherRepository(weatherDao)
                 mInstance = instance
                 instance

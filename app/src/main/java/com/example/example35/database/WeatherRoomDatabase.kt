@@ -1,4 +1,4 @@
-package com.example.example35
+package com.example.example35.database
 
 import android.content.Context
 import androidx.room.Database
@@ -6,6 +6,8 @@ import androidx.room.RoomDatabase
 import kotlin.jvm.Volatile
 import androidx.room.Room
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.example.example35.database.weather.WeatherDao
+import com.example.example35.database.weather.WeatherTable
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -25,7 +27,7 @@ abstract class WeatherRoomDatabase : RoomDatabase() {
             context: Context,
             scope : CoroutineScope
         ): WeatherRoomDatabase {
-            return mInstance?: synchronized(this){
+            return mInstance ?: synchronized(this){
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     WeatherRoomDatabase::class.java, "weather.db"

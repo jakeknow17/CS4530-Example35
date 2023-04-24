@@ -1,4 +1,4 @@
-package com.example.example35
+package com.example.example35.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.EditText
@@ -10,6 +10,11 @@ import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.example35.*
+import com.example.example35.database.weather.WeatherData
+import com.example.example35.database.weather.WeatherTable
+import com.example.example35.repository.WeatherViewModel
+import com.example.example35.repository.WeatherViewModelFactory
 import kotlin.math.roundToInt
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {

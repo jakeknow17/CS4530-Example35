@@ -1,6 +1,8 @@
-package com.example.example35
+package com.example.example35.repository
 
 import androidx.lifecycle.*
+import com.example.example35.database.weather.WeatherData
+import com.example.example35.database.weather.WeatherTable
 
 class WeatherViewModel(repository: WeatherRepository) : ViewModel() {
     // Connect a live data object to the current bit of weather info

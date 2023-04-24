@@ -1,6 +1,7 @@
-package com.example.example35
+package com.example.example35.utils
 
 
+import com.example.example35.database.weather.WeatherData
 import kotlin.Throws
 import org.json.JSONException
 import org.json.JSONObject
