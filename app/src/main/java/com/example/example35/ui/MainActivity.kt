@@ -1,11 +1,7 @@
 package com.example.example35.ui
 
 import androidx.appcompat.app.AppCompatActivity
-import android.widget.EditText
-import android.widget.TextView
 import android.os.Bundle
-import android.view.View
-import android.widget.Button
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.layout.*
@@ -18,7 +14,6 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.TextFieldValue
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.example35.*
 import com.example.example35.database.weather.WeatherTable
